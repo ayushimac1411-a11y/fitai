@@ -1,0 +1,28 @@
+{
+  "overview": "FitAI is a complete AI-powered gym fitness web app that generates personalized weekly diet and workout plans using Gemini AI. Track your BMI, daily workouts, water intake, and streaks — all with a premium dark glassmorphism UI.",
+  "features": [
+    "AI-generated weekly diet & workout plans via Gemini",
+    "BMI calculator with health category and message",
+    "Daily check-in system with streak counter",
+    "Exercise library with voice narration (Web Speech API)",
+    "Weekly progress dashboard with Recharts charts",
+    "Water intake tracker",
+    "AI fitness chat assistant",
+    "User profile with fitness goals",
+    "Dark/Light mode toggle",
+    "Admin panel for exercise management",
+    "Mobile-first with sticky bottom navigation"
+  ],
+  "category": "health-fitness",
+  "tags": [
+    "fitness",
+    "ai",
+    "gym",
+    "health",
+    "workout",
+    "diet",
+    "gemini",
+    "tracker"
+  ],
+  "last_updated": "2026-04-16T11:24:22.659Z"
+}

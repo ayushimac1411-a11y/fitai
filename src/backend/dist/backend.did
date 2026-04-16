@@ -1,0 +1,104 @@
+type WeightEntry = 
+ record {
+   date: text;
+   userId: principal;
+   weightKg: float64;
+ };
+type UserProfile = 
+ record {
+   activityLevel: text;
+   age: nat;
+   createdAt: int;
+   darkMode: bool;
+   fitnessGoal: text;
+   gender: text;
+   heightCm: float64;
+   name: text;
+   updatedAt: int;
+   userId: principal;
+   weightKg: float64;
+ };
+type TransformArg = 
+ record {
+   context: blob;
+   response: HttpRequestResult;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type HttpRequestResult = 
+ record {
+   body: blob;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type Exercise = 
+ record {
+   createdBy: opt principal;
+   description: text;
+   difficulty: nat;
+   id: text;
+   muscleGroup: text;
+   name: text;
+ };
+type DailyCheckIn = 
+ record {
+   createdAt: int;
+   date: text;
+   dietFollowed: bool;
+   steps: nat;
+   userId: principal;
+   waterGlasses: nat;
+   workoutDone: bool;
+ };
+type ChatMessage = 
+ record {
+   content: text;
+   createdAt: int;
+   id: text;
+   role: text;
+   userId: principal;
+ };
+type AIPlan = 
+ record {
+   content: text;
+   generatedAt: int;
+   planType: text;
+   userId: principal;
+ };
+service : {
+  addAdmin: (newAdmin: principal) -> ();
+  addExercise: (id: text, name: text, muscleGroup: text, difficulty: 
+   nat, description: text) -> (Result);
+  clearChatHistory: () -> ();
+  deleteExercise: (id: text) -> (Result);
+  generateAIResponse: (userMessage: text) -> (Result);
+  generateDietPlan: () -> (Result);
+  generateWorkoutPlan: () -> (Result);
+  getAIPlan: (planType: text) -> (opt AIPlan) query;
+  getChatHistory: (limit: nat) -> (vec ChatMessage) query;
+  getCheckIns: (limit: nat) -> (vec DailyCheckIn) query;
+  getProfile: () -> (opt UserProfile) query;
+  getStreak: () -> (nat) query;
+  getWeightHistory: (limit: nat) -> (vec WeightEntry) query;
+  hasGeminiApiKey: () -> (bool) query;
+  isAdmin: () -> (bool) query;
+  listExercises: () -> (vec Exercise) query;
+  logWeight: (date: text, weightKg: float64) -> (Result);
+  saveAIPlan: (planType: text, content: text) -> (Result);
+  saveChatMessage: (role: text, content: text) -> (text);
+  saveCheckIn: (date: text, workoutDone: bool, dietFollowed: bool,
+   waterGlasses: nat, steps: nat) -> (Result);
+  saveProfile: (name: text, age: nat, gender: text, heightCm: float64,
+   weightKg: float64, fitnessGoal: text, activityLevel: text, darkMode:
+   bool) -> (Result);
+  setGeminiApiKey: (key: text) -> ();
+  transformResponse: (arg: TransformArg) -> (HttpRequestResult) query;
+}
